@@ -38,9 +38,9 @@ const observer = new IntersectionObserver((entries) => {
 
 // 3. Render Team with Hover Effects
 const team = [
-    { name: "Captain Name", role: "Captain", cat: "management" },
-    { name: "Avani Jaiswal", role: "Technical Lead", cat: "technical" },
-    { name: "Social Lead", role: "Public Relations", cat: "social" }
+    { name: "Person 1", role: "Captain", cat: "management" },
+    { name: "Person 2", role: "Technical Lead", cat: "technical" },
+    { name: "Person 3", role: "Public Relations", cat: "social" }
 ];
 
 function renderTeam(filter = 'all') {
