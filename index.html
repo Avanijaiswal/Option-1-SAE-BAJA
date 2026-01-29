@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Reverage | SAE BAJA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cursor-outline"></div>
+
+    <div class="bg-wrapper">
+        <div class="moving-gradient"></div>
+    </div>
+
+    <header class="navbar">
+        <div class="brand">
+            <img src="https://via.placeholder.com/50" alt="MU" class="nav-logo">
+            <div class="brand-text">
+                <h1>TEAM REVERAGE</h1>
+                <span>MARWADI UNIVERSITY</span>
+            </div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#events">EVENTS</a></li>
+            <li><a href="#team">TEAM</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="reveal-tile hero-content">
+                <h2 class="hero-main">BUILT FOR DIRT.<br>BORN TO <span class="orange-text">CONQUER.</span></h2>
+                <p class="hero-sub">Pushing the mechanical limits of SAE BAJA at Marwadi University.</p>
+            </div>
+        </section>
+
+        <section id="team" class="team-section">
+            <h2 class="section-title reveal-tile">THE CREW</h2>
+            
+            <nav class="team-filter reveal-tile">
+                <button class="filter-btn active" data-filter="all">ALL</button>
+                <button class="filter-btn" data-filter="technical">TECHNICAL</button>
+                <button class="filter-btn" data-filter="social">SOCIAL</button>
+                <button class="filter-btn" data-filter="management">MANAGEMENT</button>
+            </nav>
+
+            <div class="team-grid" id="team-grid">
+                </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
