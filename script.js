@@ -1,10 +1,31 @@
-// 1. Cursor Outline Tracking
-const cursor = document.querySelector('.cursor-outline');
+// 1. Liquid Cursor Logic
+const dot = document.querySelector('.cursor-dot');
+const trail = document.querySelector('.cursor-trail');
+
+let mouseX = 0, mouseY = 0;
+let trailX = 0, trailY = 0;
+
 document.addEventListener('mousemove', (e) => {
-    cursor.style.opacity = "1";
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    // Immediate movement for the leading dot
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
 });
+
+// Lagging effect for the trail
+function animateCursor() {
+    // trailX follows mouseX with a delay (0.1 = high lag/liquid feel)
+    trailX += (mouseX - trailX) * 0.15;
+    trailY += (mouseY - trailY) * 0.15;
+    
+    trail.style.left = trailX + 'px';
+    trail.style.top = trailY + 'px';
+    
+    requestAnimationFrame(animateCursor);
+}
+animateCursor();
 
 // 2. 3D Scroll Reveal Observer
 const observer = new IntersectionObserver((entries) => {
@@ -15,7 +36,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.15 });
 
-// 3. Team Data & Render
+// 3. Render Team with Hover Effects
 const team = [
     { name: "Captain Name", role: "Captain", cat: "management" },
     { name: "Avani Jaiswal", role: "Technical Lead", cat: "technical" },
@@ -36,16 +57,18 @@ function renderTeam(filter = 'all') {
             <p style="color: #ff6600; font-weight:700; text-transform:uppercase; letter-spacing:1px;">${m.role}</p>
         `;
 
-        // Magnetic Cursor radius (3-4cm / 110px) on Hover
+        // Expansion on Hover (3-4cm radius)
         card.addEventListener('mouseenter', () => {
-            cursor.style.width = '110px';
-            cursor.style.height = '110px';
-            cursor.style.background = 'rgba(255, 102, 0, 0.15)';
+            trail.style.width = '115px';
+            trail.style.height = '115px';
+            trail.style.background = 'rgba(255, 102, 0, 0.2)';
+            trail.style.border = 'none';
         });
         card.addEventListener('mouseleave', () => {
-            cursor.style.width = '40px';
-            cursor.style.height = '40px';
-            cursor.style.background = 'transparent';
+            trail.style.width = '30px';
+            trail.style.height = '30px';
+            trail.style.background = 'transparent';
+            trail.style.border = '1.5px solid #ff6600';
         });
 
         grid.appendChild(card);
@@ -53,7 +76,7 @@ function renderTeam(filter = 'all') {
     });
 }
 
-// Filter Navigation
+// Filter Logic
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         document.querySelector('.filter-btn.active').classList.remove('active');
@@ -62,7 +85,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
 });
 
-// Initialize
+// Initial Setup
 renderTeam();
 observer.observe(document.querySelector('.hero-content'));
 observer.observe(document.querySelector('.section-title'));

@@ -1,7 +1,7 @@
 :root {
     --orange: #ff6600;
     --dark: #0a0a0a;
-    --card-bg: rgba(255, 255, 255, 0.05);
+    --glass: rgba(255, 255, 255, 0.05);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -11,12 +11,35 @@ body {
     color: white;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    cursor: none; /* Hide real cursor to show the custom one */
 }
 
-/* FIX: Ensure content sits below the fixed header */
+/* OFFSET FOR FIXED HEADER */
 main { padding-top: 130px; }
 
-/* Constantly Moving Background */
+/* LIQUID TRAIL CURSOR */
+.cursor-dot {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--orange);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10001;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-trail {
+    position: fixed;
+    width: 30px; height: 30px;
+    border: 1.5px solid var(--orange);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background 0.2s, border 0.3s;
+}
+
+/* ANIMATED BACKGROUND */
 .bg-wrapper {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -34,22 +57,9 @@ main { padding-top: 130px; }
     to { transform: translate(-8%, -8%); }
 }
 
-/* Cursor Glow Effect (3-4cm radius) */
-.cursor-outline {
-    position: fixed;
-    width: 40px; height: 40px;
-    border: 2px solid var(--orange);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, background 0.3s, opacity 0.3s;
-    z-index: 9999;
-    opacity: 0;
-}
-
-/* 3D "Stand Up" Animation Logic */
+/* 3D STAND-UP REVEAL */
 .reveal-tile {
-    transform: rotateX(60deg) translateY(150px) scale(0.85);
+    transform: rotateX(60deg) translateY(150px) scale(0.8);
     opacity: 0;
     transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 1.2s;
     perspective: 1500px;
@@ -61,7 +71,7 @@ main { padding-top: 130px; }
     opacity: 1;
 }
 
-/* Navbar & Branding */
+/* NAVBAR */
 .navbar {
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 6%; position: fixed; width: 100%; top: 0;
@@ -72,18 +82,18 @@ main { padding-top: 130px; }
 .brand-text h1 { font-weight: 900; font-size: 1.4rem; letter-spacing: -1px; }
 .brand-text span { font-size: 0.8rem; color: var(--orange); font-weight: 700; }
 .nav-menu { display: flex; list-style: none; gap: 30px; }
-.nav-menu a { text-decoration: none; color: white; font-weight: 900; font-size: 0.8rem; }
+.nav-menu a { text-decoration: none; color: white; font-weight: 900; font-size: 0.8rem; cursor: none; }
 
-/* Hero Branding */
+/* HERO */
 .hero { padding: 40px 6%; min-height: 70vh; display: flex; align-items: center; }
 .hero-main { font-family: 'Oswald', sans-serif; font-size: clamp(3.5rem, 12vw, 8rem); line-height: 0.85; margin-bottom: 25px; }
 .orange-text { color: var(--orange); }
 
-/* Team Section & Curved Tiles */
+/* TEAM & CURVED TILES */
 .team-filter { display: flex; justify-content: center; gap: 15px; margin: 50px 0; }
 .filter-btn {
     background: none; border: 1px solid #333; color: white;
-    padding: 10px 25px; border-radius: 50px; cursor: pointer; font-weight: 900;
+    padding: 10px 25px; border-radius: 50px; cursor: none; font-weight: 900;
 }
 .filter-btn.active { background: var(--orange); border-color: var(--orange); }
 
@@ -92,7 +102,7 @@ main { padding-top: 130px; }
 .member-card {
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 45px; /* Highly Curved Corners */
+    border-radius: 45px; /* Highly Curved */
     padding: 60px 40px;
     text-align: center;
     transform-style: preserve-3d;
